@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piyush | Google Developer Expert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0e0e0e;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+    a {
+      cursor: pointer;
+    }
+
+    /* HEADER & NAV */
+    header {
+      background-color: #121416;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px;
+    }
+    nav a.active::after,
+    nav a:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #00c896;
+      bottom: 0;
+      left: 0;
+    }
+
+    /* HERO SECTION */
+    #home.hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 40px;
+      flex-wrap: wrap;
+      background-color: #0e0e0e;
+    }
+    .hero-text {
+      max-width: 600px;
+    }
+    .hero-text h2 {
+      font-size: 3rem;
+      color: #00d09c;
+    }
+    .hero-text h2 span {
+      background: linear-gradient(to right, #00d09c, #3c82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 20px 0 10px;
+    }
+    .hero-text p {
+      margin: 10px 0 30px;
+      color: #bdbdbd;
+      line-height: 1.6;
+    }
+    .hero-buttons button {
+      margin-right: 15px;
+      padding: 12px 24px;
+      border: 2px solid #00d09c;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: transparent;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .hero-buttons button:hover {
+      background-color: #00d09c;
+      color: #000;
+    }
+    .social-icons {
+      margin-top: 30px;
+    }
+    .social-icons a {
+      color: white;
+      margin-right: 15px;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #00d09c;
+    }
+    .hero-image {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+    }
+    .circle {
+      background: rgba(0, 168, 130, 0.6);
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+      filter: blur(10px);
+      animation: pulse 4s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+      }
+    }
+    .scroll-down {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 2rem;
+      color: #00d09c;
+      cursor: pointer;
+    }
+
+    /* ABOUT SECTION */
+    #about {
+      background-color: #1c1f26;
+      padding: 40px 40px 60px;
+      color: #fff;
+    }
+    #about h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    #about h2 span {
+      background: linear-gradient(to right, #00d09c, #3c82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    .card {
+      background-color: #121416;
+      padding: 30px;
+      border-radius: 15px;
+      flex: 1 1 450px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      color: #cfd2dc;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: white;
+    }
+    .card h3 i {
+      color: #00d09c;
+      margin-right: 10px;
+    }
+    .card p {
+      line-height: 1.6;
+    }
+    .card p strong {
+      color: white;
+    }
+    .social-icons {
+      margin: 15px 0;
+    }
+    .social-icons a {
+      color: #ccc;
+      margin-right: 12px;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #00d09c;
+    }
+    .btn {
+      margin-top: 20px;
+      background-color: #00c896;
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .timeline-item {
+      margin-bottom: 25px;
+    }
+    .timeline-item h4 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: white;
+    }
+    .timeline-item small {
+      color: #8aeec5;
+      font-size: 0.9rem;
+    }
+    .timeline-item p {
+      margin-top: 5px;
+      color: #bcbcbc;
+      font-size: 0.95rem;
+    }
+    .dot {
+      height: 10px;
+      width: 10px;
+      background-color: #00d09c;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    /* STATS SECTION */
+    .stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px 20px;
+      background-color: #1c1f26;
+    }
+    .stat-box {
+      background-color: #121416;
+      padding: 30px 40px;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 200px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      color: #cfd2dc;
+    }
+    .stat-box h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #00d09c, #3c82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .stat-box p {
+      margin-top: 10px;
+    }
+
+    /* SERVICES SECTION */
+    .services {
+      padding: 20px 40px 60px;
+      background-color: #1c1f26;
+      color: #fff;
+    }
+    .services h2 {
+      text-align: center;
+      font-size: 2rem;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .services h2 span {
+      background: linear-gradient(to right, #00d09c, #3c82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .service-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .service-card {
+      background-color: #121416;
+      padding: 30px 25px;
+      border-radius: 15px;
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      color: #cfd2dc;
+    }
+    .service-card i {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #00d09c;
+    }
+    .service-card h4 {
+      margin: 0 0 10px;
+      color: white;
+    }
+    .service-card p {
+      font-size: 0.95rem;
+    }
+
+    /* PACKAGES SECTION */
+    #packages {
+      background-color: #1c1c1c;
+      padding: 40px 40px 60px;
+      color: white;
+    }
+    #packages h1 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    #packages h1 span {
+      color: #22d3ee; /* cyan-400 */
+    }
+    #packages p.subtitle {
+      text-align: center;
+      color: #a1a1aa; /* gray-400 */
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    .packages-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+      padding: 0 10px;
+    }
+    .package-card {
+      background-color: #121212;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease;
+    }
+    .package-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px #00d09caa;
+    }
+    .package-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 10px;
+    }
+    .package-icon {
+      background-color: #16a34a; /* green-600 */
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+    }
+    .package-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .package-desc {
+      color: #a3a3a3;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+    .package-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #9ca3af; /* gray-400 */
+    }
+    .package-footer .links a {
+      margin-right: 16px;
+      color: #9ca3af;
+      font-size: 1.25rem;
+      transition: color 0.3s ease;
+    }
+    .package-footer .links a:hover {
+      color: #00d09c;
+    }
+    .package-stars {
+      color: #facc15; /* yellow-400 */
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+      }
+      .hero-text h2 {
+        font-size: 2.25rem;
+      }
+      .hero-text h3 {
+        font-size: 1.2rem;
+      }
+      .services h2,
+      #about h2,
+      #packages h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Piyush</h1>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#packages">Packages</a>
+      <a href="#stats">Stats</a>
+      <a href="#services">Services</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h2>Flutter <span>Developer</span></h2>
+      <h3>Google Developer Expert</h3>
+      <p>
+        I create awesome mobile apps and packages with Flutter and Firebase to help developers build better.
+      </p>
+      <div class="hero-buttons">
+        <button>Contact Me</button>
+        <button>Download Resume</button>
+      </div>
+      <div class="social-icons">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="circle"></div>
+      
+    </div>
+  </section>
+  <div class="scroll-down" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About <span>Me</span></h2>
+    <div class="container">
+      <div class="card">
+        <h3><i class="fa-solid fa-user"></i> Introduction</h3>
+        <p>Hello! I'm Piyush, a passionate Flutter developer and Google Developer Expert. I enjoy building beautiful and efficient mobile apps and creating open-source packages that empower other developers.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <button class="btn">Download Resume</button>
+      </div>
+
+      <div class="card">
+        <h3><i class="fa-solid fa-briefcase"></i> Experience</h3>
+        <div class="timeline-item">
+          <h4><span class="dot"></span>Flutter Developer at XYZ Corp</h4>
+          <small>Jan 2020 - Present</small>
+          <p>Developed multiple Flutter apps used by thousands of users worldwide.</p>
+        </div>
+        <div class="timeline-item">
+          <h4><span class="dot"></span>Open Source Contributor</h4>
+          <small>2018 - Present</small>
+          <p>Contributed to popular Flutter libraries and authored my own packages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages">
+    <h1>Flutter <span>Packages</span></h1>
+    <p class="subtitle">
+      Open-source Flutter packages I've developed to solve common problems
+    </p>
+    <div class="packages-grid">
+      <!-- Package 1 -->
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-icon"><i class="fa-brands fa-flutter"></i></div>
+          <h2 class="package-title">contactus</h2>
+        </div>
+        <p class="package-desc">
+          A package which helps developers to add their contact information with ease. Includes support for website, email, phone number, and more.
+        </p>
+        <div class="package-footer">
+          <div class="links">
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <span class="package-stars">★ 65+</span>
+        </div>
+      </div>
+
+      <!-- Package 2 -->
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-icon"><i class="fa-brands fa-flutter"></i></div>
+          <h2 class="package-title">parent_child_checkbox</h2>
+        </div>
+        <p class="package-desc">
+          A Flutter package that establishes hierarchy in checkboxes, creating parent-child relationships with synchronized selection states.
+        </p>
+        <div class="package-footer">
+          <div class="links">
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <span class="package-stars">★ 40+</span>
+        </div>
+      </div>
+
+      <!-- Package 3 -->
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-icon"><i class="fa-brands fa-flutter"></i></div>
+          <h2 class="package-title">super_extensions</h2>
+        </div>
+        <p class="package-desc">
+          A comprehensive Flutter package that supports the most commonly used extension methods to boost development productivity.
+        </p>
+        <div class="package-footer">
+          <div class="links">
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <span class="package-stars">★ 10+</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" class="stats">
+    <div class="stat-box">
+      <h1>40+</h1>
+      <p>Projects Completed</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <h2>What I <span>Do</span></h2>
+    <div class="service-cards">
+      <div class="service-card">
+        <i class="fas fa-laptop-code"></i>
+        <h4>Mobile App Development</h4>
+        <p>Building scalable, beautiful Flutter apps for iOS and Android.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-cloud"></i>
+        <h4>Firebase Integration</h4>
+        <p>Seamless backend setup and integration with Firebase for real-time apps.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h4>Training & Workshops</h4>
+        <p>Flutter & Firebase workshops to help teams ramp up quickly.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-bullhorn"></i>
+        <h4>Speaking & Mentorship</h4>
+        <p>Community talks, mentorship, and content creation to help others grow.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Nav active highlight on scroll
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
